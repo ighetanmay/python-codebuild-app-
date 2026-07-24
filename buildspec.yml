@@ -1,26 +1,31 @@
 version: 0.2
+
 phases:
-install:
-runtime-versions:
-python: 3.11
-commands:
-- echo "Installing dependencies..."
-- pip install -r requirements.txt
-- pip install pytest
-pre_build:
-commands:
-- echo "Running unit tests..."
-- pytest test_app.py
-build:
-commands:
-- echo "Build started on `date`"
-- echo "Packaging application..."
-post_build:
-commands:
-- echo "Build completed on `date`"
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt
+      - pip install pytest
+
+  pre_build:
+    commands:
+      - echo "Running unit tests..."
+      - pytest test_app.py
+
+  build:
+    commands:
+      - echo "Build started on $(date)"
+      - echo "Packaging application..."
+
+  post_build:
+    commands:
+      - echo "Build completed on $(date)"
+
 artifacts:
-files:
-- app.py
-- requirements.txt
-- Dockerfile
-name: python-app-build-$(date +%Y%m%d%H%M%S)
+  files:
+    - app.py
+    - requirements.txt
+    - Dockerfile
+  name: python-app-build-$(date +%Y%m%d%H%M%S)
